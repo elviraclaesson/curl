@@ -1,6 +1,6 @@
 <?php
 
-function status_header($code = 200) {
+/*function status_header($code = 200) {
     $messege = [
         200 => "OK",
         201 => "Created",
@@ -19,3 +19,22 @@ function status_header($code = 200) {
     header("HTTP/1.0 ".$code." ".$messege[$code]);
 }
 status_header(404);
+
+*/
+//[header => värde]
+function headers(array $headers = []) {
+    foreach ($headers as $header => $value) {
+        header("$header: $value");
+    }
+    
+}
+//visas i headern att man får en response request.
+headers([
+    "connection" => "keep-alive"
+]);
+
+function redirect($url, $code = 302) {
+    status_header($code);
+    header("Location: $url");
+    exit;
+}
